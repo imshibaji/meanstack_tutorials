@@ -30,10 +30,34 @@ router.get('/api/users', async function(req, res, next) {
   res.json(users);
 });
 
-router.get('/api/user', async function(req, res, next){
+router.post('/api/user', async function(req, res, next){
   var user = new User(req.query);
   await user.save();
   res.json({message:'User created', data: user});
+});
+
+router.get('/user', async function(req, res, next){
+  res.render('user-add', {title:'New User Information'});
+});
+
+router.post('/users/:id', async function(req, res, next){
+  console.log(req.params.id);
+  if(req.params.id){
+    // var user = await User.findOne({name: req.params.id});
+    var deleteUser = await User.deleteOne({_id: req.params.id});
+   console.log(deleteUser.deletedCount);
+  }
+  res.redirect('/users');
+});
+
+router.post('/user', async function(req, res, next){
+  if(req.body.name != '' && req.body.email != ''){
+    var user = new User(req.body);
+    await user.save();
+    res.redirect('/users');
+  }else{
+    res.redirect('/user');
+  }
 });
 
 module.exports = router;

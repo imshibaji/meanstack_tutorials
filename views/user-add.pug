@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .container
+    .row.justify-content-center
+        .col-6.p-5
+            h1= title
+            form(action="/user", method="post") 
+                .mb-3
+                    label.form-label(for='name') Input Your Name
+                    input#name.form-control(type='text' name="name" placeholder='Input Your Name')
+                .mb-3
+                    label.form-label(for='email') Input Your Email
+                    input#email.form-control(type='email' name="email" placeholder='Input Your Email')
+                .mb-3
+                    label.form-label(for='mobile') Input Your Mobile Number
+                    input#mobile.form-control(type='text' name="mobile" placeholder='Input Your Mobile Number')
+                .mb-3
+                    button.btn.btn-success(type="submit") Add User
+

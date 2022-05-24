@@ -5,12 +5,15 @@ block content
   table.table(border='1')
     tr
         th name
-        th Username
         th email
         th mobile
+        th actions
     each u in users
         tr
             td=u.name
-            td=u.user
             td=u.email
             td=u.mobile
+            td
+              div
+                form(action="/users/"+u.id, method="post")
+                  button.btn.btn-danger(type="submit") Delete
